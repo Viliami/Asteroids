@@ -10,10 +10,15 @@ float rotation = 0.0f;
 void draw(){
     glLoadIdentity();
     gluLookAt(
-    0,0,1,//position
+    0,-1,1.5,//position
     0,15,0.99f,//center
     0,1,0//up
     );
+    /*gluLookAt(
+    0,5,5,//position
+    0,0,0.0f,//center
+    0,1,0//up
+    );*/
     glScalef(0.5f,0.5f,0.5f);
     glRotatef(180,0,0,1);
     glRotatef(rotation,0,1,0);
@@ -39,9 +44,9 @@ void resize(int w, int h){
     if(h == 0)
         h = 1;
     float ratio = w*1.0f/h;
-    glLoadIdentity();
     glMatrixMode(GL_PROJECTION);
-    glViewport(1,1,w,h);
+    glLoadIdentity();
+    glViewport(0,0,w,h);
     gluPerspective(90,ratio,0.1f,100);
     glMatrixMode(GL_MODELVIEW);
 }
