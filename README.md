@@ -13,10 +13,10 @@ Currently a work in progress.
 
 ###How to compile and run
 Simply type
-'''
+```
 make
-'''
+```
 and then run the program by typing
-'''
+```
 ./test
-'''
+```
