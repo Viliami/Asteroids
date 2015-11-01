@@ -2,6 +2,7 @@
 #include "loaders.h"
 #include "textfile.h"
 #include <stdio.h>
+#include "ship.h"
 
 int numVerts;
 GLfloat *vertexArray, *normalArray, *uvArray;
