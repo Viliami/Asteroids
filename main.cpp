@@ -1,44 +1,12 @@
 #include <GL/glut.h>
 #include "loaders.h"
-#include "textfile.h"
 #include <stdio.h>
 #include "ship.h"
 
-int numVerts;
-GLfloat *vertexArray, *normalArray, *uvArray;
-float rotation = 0.0f;
+Ship* ship = new Ship();
 
 void draw(){
-    glLoadIdentity();
-    gluLookAt(
-    0,-1,1.5,//position
-    0,15,0.99f,//center
-    0,1,0//up
-    );
-    /*gluLookAt(
-    0,5,5,//position
-    0,0,0.0f,//center
-    0,1,0//up
-    );*/
-    glScalef(0.5f,0.5f,0.5f);
-    glRotatef(180,0,0,1);
-    glRotatef(rotation,0,1,0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //glBindTexture(GL_TEXTURE_2D,texture[textureNumber]);
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_NORMAL_ARRAY);
-    //glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glVertexPointer(3,GL_FLOAT,0,vertexArray);
-    glNormalPointer(GL_FLOAT,0,normalArray);
-
-    //glTexCoordPointer(2,GL_FLOAT,0,uvArray);
-
-    glDrawArrays(GL_TRIANGLES,0,numVerts);
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_NORMAL_ARRAY);
-    //glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    //rotation+=1.0f;
-    glutSwapBuffers();
+    ship->draw();
 }
 
 void resize(int w, int h){
@@ -63,24 +31,21 @@ void normalKeys(unsigned char key, int x, int y){
 void specialKeys(int key, int x, int y){
     switch(key){
         case GLUT_KEY_UP:
-            printf("UP\n");
+            printf("Fire\n");
             break;
         case GLUT_KEY_DOWN:
             printf("DOWN\n");
             break;
         case GLUT_KEY_LEFT:
-            //printf("LEFT\n");
-            rotation += 2.0f;
+            ship->rotate_left();
             break;
         case GLUT_KEY_RIGHT:
-            //printf("RIGHT\n");
-            rotation -= 2.0f;
+            ship->rotate_right();
             break;
     }
 }
 
 void initGL(){
-    loadOBJ("data/models/ship.dae",vertexArray,normalArray,uvArray,numVerts);
     GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
     GLfloat light_ambient[] = { 0.3f, 0.3f, 0.3f, 0.0f };
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
