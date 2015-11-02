@@ -2,11 +2,14 @@
 #include "loaders.h"
 #include <stdio.h>
 #include "ship.h"
+#include "missile.h"
 
 Ship* ship = new Ship();
+Missile* missile = new Missile();
 
 void draw(){
-    ship->draw();
+    //ship->draw();
+    missile->draw();
 }
 
 void resize(int w, int h){
