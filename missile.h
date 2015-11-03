@@ -3,11 +3,12 @@
 
 class Missile{
     public:
+        float x = 0, y = 0, z = 0;
         Missile();
         ~Missile();
         void draw();
     private:
         int numVerts;
         GLfloat *vertexArray, *normalArray, *uvArray;
-        float rotation = 0.0f;
+        float rotation = 90.0f;
 };

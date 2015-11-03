@@ -8,8 +8,11 @@ Ship* ship = new Ship();
 Missile* missile = new Missile();
 
 void draw(){
+    glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //ship->draw();
     missile->draw();
+    glutSwapBuffers();
 }
 
 void resize(int w, int h){
@@ -35,15 +38,19 @@ void specialKeys(int key, int x, int y){
     switch(key){
         case GLUT_KEY_UP:
             printf("Fire\n");
+            missile->z-=0.05f;
             break;
         case GLUT_KEY_DOWN:
             printf("DOWN\n");
+            missile->z+=0.05f;
             break;
         case GLUT_KEY_LEFT:
             ship->rotate_left();
+            missile->x+=0.05f;
             break;
         case GLUT_KEY_RIGHT:
             ship->rotate_right();
+            missile->x-=0.05f;
             break;
     }
 }
